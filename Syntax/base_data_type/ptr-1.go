@@ -21,6 +21,21 @@ func t1() {
 	// j= 0
 }
 
+func t2() {
+	// null ptr
+	i := 10
+	var p *int
+	var q *int = nil
+	// pnil:= ([]int)(nil) // can be convert
+	if q == p {
+		fmt.Println("nil ptr")
+	}
+	fmt.Printf("%v, %T\n", p, p)
+	p = &i
+	fmt.Printf("%v, %T\n", p, p)
+}
+
 func main() {
-	t1()
+	// t1()
+	t2()
 }
