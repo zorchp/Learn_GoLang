@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"kpkg" //use local pkg
+	"kpkg"
 )
 
 func main() {
-	fmt.Println("hello pkg")
+	fmt.Println("main-in pkg2")
 	kpkg.SayHello()
-	// hello pkg
+	// main-in pkg2
 	// hello kkk
 }
