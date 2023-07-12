@@ -5,22 +5,26 @@ import (
 	"time"
 )
 
+// 采用条件变量等待投票结束
 func main() {
-	rand.Seed(time.Now().UnixNano())
 	count := 0
 	finished := 0
+
+	ch := make(chan bool)
+
 	for i := 0; i < 10; i++ {
 		go func() {
-			vote := requestVote()
-			if vote {
-				count++
-			}
-			finished++
+			ch <- requestVote()
 		}()
 	}
 	for count < 5 && finished != 10 {
-		//wait
+		v := <-ch
+		if v {
+			count++
+		}
+		finished++
 	}
+
 	if count >= 5 {
 		println("received 5+ votes")
 	} else {
@@ -29,6 +33,7 @@ func main() {
 }
 
 func requestVote() bool {
-	time.Sleep(time.Duration(rand.Intn(100)) * time.Millisecond)
-	return rand.Intn(2) == 1
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
+	time.Sleep(time.Duration(r.Intn(100)) * time.Millisecond)
+	return r.Intn(2) == 0
 }
