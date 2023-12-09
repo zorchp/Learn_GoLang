@@ -25,11 +25,11 @@ func t2() {
 	for k, v := range m {
 		fmt.Println(k, v)
 	}
-	//just value
+	// just value
 	for _, v := range m {
 		fmt.Println(v)
 	}
-	//just key
+	// just key
 	for k := range m {
 		fmt.Println(k)
 	}
